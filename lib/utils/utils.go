@@ -30,9 +30,9 @@ func SetToArr(elements []string) []string{
 }
 
 // Set removes duplicates from string array
-func Set(elements []string) map[string]bool{
+func Set(elements []string) map[string]int{
 	seen := map[string]bool{}
-	result := map[string]bool{}
+	result := map[string]int{}
 	val := 0
 	for x := range elements {
 		if seen[elements[x]] != true {
@@ -72,4 +72,12 @@ func Count(s []string, e string) int{
 		}
 	}
 	return tmp
+}
+
+func MapToArr(m map[string]int) []string {
+	arr := []string
+	for k := range m{
+		append(arr, k)
+	}
+	return arr
 }
