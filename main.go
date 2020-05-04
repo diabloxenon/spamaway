@@ -287,7 +287,7 @@ func main() {
 	//Last line is blank
 	for _, line := range dat[0 : len(dat)-1] {
 		// Remove labels from start
-		words := strings.Split(line[2:len(line)], " ")
+		words := strings.Split(line[2:], " ")
 		// Classify tokens from a document
 		allScores, class, certain := classifier.Classify(words)
 		// fmt.Println(allScores, class, certain)
@@ -305,8 +305,8 @@ func main() {
 	successPercent := (success / total) * 100
 	failedPercent := (failed / total) * 100
 
-	fmt.Println(successPercent)
-	fmt.Println(failedPercent)
+	fmt.Printf("Success Rate is %0.3f\n", successPercent)
+	fmt.Printf("Rate of false positive emails is %0.3f\n", failedPercent)
 
 }
 
