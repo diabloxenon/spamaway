@@ -9,12 +9,6 @@ import (
 	"strings"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
 // Create dictionary from all the emails in directory
 func BuildDictionary(dir string) error {
 	var (
@@ -51,13 +45,19 @@ func BuildDictionary(dir string) error {
 	// We now have the array of words, which may have duplicate entries
 	WordDict = utils.Set(WordDict)
 	fmt.Println(len(WordDict))
+
+	// Removes punctuations and non-alphabets
+	for i, word := range WordDict{
+		if len(word) == 1 || !utils.IsAlpha(word) {
+			WordDict = utils.Pop(WordDict, i)
+		}
+	}
+	fmt.Println(len(WordDict))
+
 	return nil
 }
 
 func main() {
-	err := BuildDictionary("dataset/train_data")
-	if err != nil {
-		fmt.Println(err)
-	}
+	// err := BuildDictionary("dataset/train_data")
 
 }
