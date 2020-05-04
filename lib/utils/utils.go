@@ -30,9 +30,9 @@ func SetToArr(elements []string) []string{
 }
 
 // Set removes duplicates from string array
-func Set(elements []string) map[string]int{
+func Set(elements []string) WordDict{
 	seen := map[string]bool{}
-	result := map[string]int{}
+	result := make(WordDict)
 	val := 0
 	for x := range elements {
 		if seen[elements[x]] != true {
@@ -74,10 +74,10 @@ func Count(s []string, e string) int{
 	return tmp
 }
 
-func MapToArr(m map[string]int) []string {
-	arr := []string
+func MapToArr(m WordDict) []string {
+	arr := []string{}
 	for k := range m{
-		append(arr, k)
+		arr = append(arr, k)
 	}
 	return arr
 }

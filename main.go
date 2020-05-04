@@ -15,7 +15,7 @@ type FeatMat [][]int
 type LabelMat []int
 
 // BuildDictionary creates dictionary from all the emails in directory
-func BuildDictionary(dir string) ([]WordDict, error) {
+func BuildDictionary(dir string) ([]utils.WordDict, error) {
 	var err error
 	// Read the file names and sorts them.
 	emailList, err := ioutil.ReadDir(dir)
@@ -90,7 +90,7 @@ func BuildDictionary(dir string) ([]WordDict, error) {
 	fmt.Println(len(goodworddict))
 	fmt.Println(len(spamworddict))
 
-	return [goodworddict, spamworddict]WordDict, nil
+	return []utils.WordDict{goodworddict, spamworddict}, nil
 }
 
 // BuildFeatures returns the feature matrix
@@ -133,17 +133,21 @@ func BuildLabels(dir string) (LabelMat, error){
 	}
 
 	// Label vector
-	labelMat = [len(emails)]int
+	labelMat := make([]int, len(emailList))
 
 	for i, email := range emailList{
-		labelMat[i] = 1 ? strings.Contains(email.Name(), "spms") : 0
+		if strings.Contains(email.Name(), "spms") {
+			labelMat[i] = 1 
+		} else {
+			labelMat[i] = 0
+		}
 	}
 
 	return labelMat, nil
 }
 
 func main() {
-	trainDir = "dataset/train_data"
+	trainDir := "dataset/train_data"
 	
 	fmt.Println("1. Building dictionary")
 	dict, err := BuildDictionary(trainDir)
