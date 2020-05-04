@@ -7,19 +7,19 @@ import (
 
 // Check the errors
 func Check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
 // SetToArr removes duplicates from string array
-func SetToArr(elements []string) []string{
+func SetToArr(elements []string) []string {
 	seen := map[string]bool{}
 	result := []string{}
 	for x := range elements {
-		if seen[elements[x]] == true{
+		if seen[elements[x]] == true {
 			// Do not add duplicate
-		} else{
+		} else {
 			// This element is seen now
 			seen[elements[x]] = true
 			// Append to result slice
@@ -30,7 +30,7 @@ func SetToArr(elements []string) []string{
 }
 
 // Set removes duplicates from string array
-func Set(elements []string) WordDict{
+func Set(elements []string) WordDict {
 	seen := map[string]bool{}
 	result := make(WordDict)
 	val := 0
@@ -46,15 +46,14 @@ func Set(elements []string) WordDict{
 	return result
 }
 
-
 // IsAlpha Checks if the string is alphabet or not
 func IsAlpha(s string) bool {
-    for _, r := range s {
-        if !unicode.IsLetter(r) {
-            return false
-        }
-    }
-    return true
+	for _, r := range s {
+		if !unicode.IsLetter(r) {
+			return false
+		}
+	}
+	return true
 }
 
 // Pop elements out of array
@@ -64,10 +63,10 @@ func Pop(s []string, i int) []string {
 }
 
 // Count an element in array
-func Count(s []string, e string) int{
+func Count(s []string, e string) int {
 	tmp := 0
-	for i := range s{
-		if s[i] == e{
+	for i := range s {
+		if s[i] == e {
 			tmp++
 		}
 	}
@@ -76,7 +75,7 @@ func Count(s []string, e string) int{
 
 func MapToArr(m WordDict) []string {
 	arr := []string{}
-	for k := range m{
+	for k := range m {
 		arr = append(arr, k)
 	}
 	return arr
