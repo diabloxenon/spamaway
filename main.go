@@ -94,7 +94,7 @@ func BuildDictionary(dir string) ([]utils.WordDict, error) {
 }
 
 // BuildFeatures returns the feature matrix
-func BuildFeatures(dir string, dictionary WordDict) (FeatMat, error) {
+func BuildFeatures(dir string, dictionary utils.WordDict) (FeatMat, error) {
 	// Read the file names
 	emailList, err := ioutil.ReadDir(dir)
 	if err != nil {
@@ -102,22 +102,26 @@ func BuildFeatures(dir string, dictionary WordDict) (FeatMat, error) {
 	}
 
 	// Matrix to have features
-	featMatrix := [len(emailList)][len(dictionary)]int
+	// Renders a matrix like this featMatrix => [len(emailList)][len(dictionary)]int
+	featMatrix := make([][]int, len(emailList))
+	for i := range featMatrix {
+		featMatrix[i] = make([]int, len(dictionary))
+	}
 
 	// Collecting the number of occurences of each of the words in the emails.
-	for email_i, email := range emailList {
+	for emailI, email := range emailList {
 		data, err := ioutil.ReadFile(fmt.Sprintf("%s/%s", dir, email.Name()))
 		if err != nil {
 			return nil, fmt.Errorf("File opening failed %s", err)
 		}
 		// Breaks the email into lines.
 		dat := strings.Split(string(data), "\n")
-		for line_i, line := range dat{
+		for lineI, line := range dat{
 			// Body of email is only 3rd line of text file
-			if line_i == 2{
+			if lineI == 2{
 				words := strings.Split(line, " ")
-				for word, word_i := range dictionary{
-					featMatrix[email_i][word_i] = utils.Count(words, word)
+				for word, wordI := range dictionary{
+					featMatrix[emailI][wordI] = utils.Count(words, word)
 				}
 			}
 		}
