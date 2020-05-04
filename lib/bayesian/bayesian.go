@@ -1,3 +1,7 @@
+/*
+Package bayesian is a Naive Bayesian Classifier
+Jake Brukhman <jbrukh@gmail.com>
+*/
 package bayesian
 
 import (
